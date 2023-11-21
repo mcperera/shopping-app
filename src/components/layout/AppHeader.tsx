@@ -2,9 +2,11 @@ import React from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Appbar} from 'react-native-paper';
 import {AppStackNavigationTypes} from '../../types/navigations';
+import {StackNavigation} from '../../navigations/AppStackNavigation';
+import {AppHeaderComType} from '../../types';
 
-function AppHeader({title, backButton}: any) {
-  const navigation = useNavigation();
+function AppHeader({title, backButton}: AppHeaderComType) {
+  const navigation = useNavigation<StackNavigation>();
   const route = useRoute();
   const goBack = () => navigation.goBack();
 

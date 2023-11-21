@@ -7,9 +7,10 @@ import {useReduxDispatch, useReduxSelector} from '../store';
 import {ProductType} from '../types';
 import {AppStackNavigationTypes} from '../types/navigations';
 import {addToCart} from '../store/reducer/cartSlice';
+import {StackNavigation} from '../navigations/AppStackNavigation';
 
 const ProductDetailScreen = ({route}: any) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
   const dispatch = useReduxDispatch();
   const [visible, setVisible] = React.useState(false);
   const {data} = useReduxSelector(state => state.products);
@@ -19,8 +20,8 @@ const ProductDetailScreen = ({route}: any) => {
 
   const onDismissSnackBar = () => setVisible(false);
 
-  const handleAddToCart = (id: number) => {
-    dispatch(addToCart(id));
+  const handleAddToCart = (id: number, amount: number) => {
+    dispatch(addToCart({id, amount}));
     setVisible(true);
   };
 
@@ -44,7 +45,7 @@ const ProductDetailScreen = ({route}: any) => {
         </View>
       </ScrollView>
       <TouchableOpacity
-        onPress={() => handleAddToCart(productId)}
+        onPress={() => handleAddToCart(productId, price.amount)}
         className=" absolute bottom-12 right-8 bg-blue-500 h-14 w-14 rounded-full flex justify-center items-center">
         <Icon source="cart" color={'white'} size={25} />
       </TouchableOpacity>

@@ -4,8 +4,17 @@ import HomeScreen from '../screens/HomeScreen';
 import ProductDetailScreen from '../screens/ProductDetailScreen';
 import ProductCartScreen from '../screens/CartScreen';
 import {AppStackNavigationTypes} from '../types/navigations';
+import {NavigationProp} from '@react-navigation/native';
 
-const Stack = createNativeStackNavigator();
+export type ScreenNames = [
+  AppStackNavigationTypes.HOME_SCREEN,
+  AppStackNavigationTypes.PRODUCT_DETAIL_SCREEN,
+  AppStackNavigationTypes.MY_CART_SCREEN,
+];
+export type RootStackParamList = Record<ScreenNames[number], any>;
+export type StackNavigation = NavigationProp<RootStackParamList>;
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppStackNavigation = () => {
   return (
@@ -16,6 +25,7 @@ const AppStackNavigation = () => {
         options={{headerShown: false}}
         initialParams={{
           title: 'Welcome!',
+          backButton: false,
         }}
       />
       <Stack.Screen

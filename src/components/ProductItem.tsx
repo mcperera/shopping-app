@@ -2,19 +2,8 @@ import {View, TouchableOpacity, Image, Text} from 'react-native';
 import React from 'react';
 import {AppStackNavigationTypes} from '../types/navigations';
 import {useNavigation} from '@react-navigation/native';
-
-type ProductItemType = {
-  id: number;
-  SKU: string;
-  name: string;
-  brandName: string;
-  mainImage: string;
-  price: {[key: string]: string};
-  sizes: Array<string>;
-  stockStatus: boolean;
-  colour: string;
-  description: string;
-};
+import {StackNavigation} from '../navigations/AppStackNavigation';
+import {ProductItemComType} from '../types';
 
 const ProductItem = ({
   id,
@@ -22,8 +11,8 @@ const ProductItem = ({
   brandName,
   mainImage,
   price,
-}: ProductItemType) => {
-  const navigation = useNavigation();
+}: ProductItemComType) => {
+  const navigation = useNavigation<StackNavigation>();
 
   const navigateToProductScreen = () =>
     navigation.navigate(AppStackNavigationTypes.PRODUCT_DETAIL_SCREEN, {
